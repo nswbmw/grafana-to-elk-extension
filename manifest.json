@@ -1,0 +1,19 @@
+{
+   "author": "nswbmw",
+   "name": "grafana-to-elk",
+   "description": "grafana-to-elk",
+   "manifest_version": 2,
+   "version": "1.0.0",
+   "content_scripts": [ {
+      "js": [ "moment.js", "grafana-to-elk.js" ],
+      "matches": [ "http://localhost:5601/*" ],
+      "all_frames": true,
+      "run_at": "document_end"
+   } ],
+   "icons": {
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "64": "icons/icon-64.png",
+      "128": "icons/icon-128.png"
+   }
+}
