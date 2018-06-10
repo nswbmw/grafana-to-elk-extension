@@ -32,17 +32,19 @@
   }
 
   function addRequestLink() {
-    [].slice.call(document.querySelectorAll(".truncate-by-height,.doc-viewer-value")).forEach(function (item) {
-      if (item.innerText.trim().match(/^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/)) {
-        var time = item.baseURI.match(/time\:\(.*?\)/)[0];
-        var uuid = item.innerText;
-        var url = `${kibanaUrl}/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),${time})&_a=(columns:!(step,take,error.message),index:'logstash-*',interval:auto,query:(query_string:(analyze_wildcard:!t,query:%22${uuid}%22)),sort:!(step,asc))`;
-        item.innerHTML = `<a href="${url}" target="_blank">${item.innerText}</a>`.replace('&amp;', '&');
-      }
-    });
-    [].slice.call(document.querySelectorAll('[title=fn].doc-viewer-field')).forEach(function (item) {
-      var fnItem = item.parentElement.children[2].children[0];
-      fnItem.innerHTML = `<mark>${fnItem.innerText}</mark>`;
-    });
+    try {
+      [].slice.call(document.querySelectorAll(".truncate-by-height,.doc-viewer-value")).forEach(function (item) {
+        if (item.innerText.trim().match(/^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/)) {
+          var time = item.baseURI.match(/time\:\(.*?\)/)[0];
+          var uuid = item.innerText;
+          var url = `${kibanaUrl}/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),${time})&_a=(columns:!(step,take,error.message),index:'logstash-*',interval:auto,query:(query_string:(analyze_wildcard:!t,query:%22${uuid}%22)),sort:!(step,asc))`;
+          item.innerHTML = `<a href="${url}" target="_blank">${item.innerText}</a>`.replace('&amp;', '&');
+        }
+      });
+      [].slice.call(document.querySelectorAll('[title=fn].doc-viewer-field')).forEach(function (item) {
+        var fnItem = item.parentElement.children[2].children[0];
+        fnItem.innerHTML = `<mark>${fnItem.innerText}</mark>`;
+      });
+    } catch (e) {}
   }
 })();
